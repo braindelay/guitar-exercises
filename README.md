@@ -1,6 +1,9 @@
 # Guitar Exercises
 
-There's a sample here: https://braindelay-guitar-exercises.glitch.me/
+The project is deployed to glitch.me: 
+* As [braindelay-guitar-exercises](https://glitch.com/edit/#!/braindelay-guitar-exercises)
+* With a public instance: [braindelay-guitar-exercises.glitch.me](https://braindelay-guitar-exercises.glitch.me)
+
 
 A simple project for running through some guitar exercises.
 
