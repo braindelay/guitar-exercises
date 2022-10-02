@@ -33,7 +33,11 @@ const loadNextExercise  = () => {
           <h1>${exercise.tone} ${exercise.scale.label} ${exercise.exercise.label}</h1>   
           <span><i>${exercise.exercise.description}</small></i></span>       
           <p><div id="notes"></div></p>
-          <div class="fb-container" data-frets="17" data-notes="c major" data-showTitle="true"></div>
+          <div  class="fb-container" 
+                data-frets="17"  
+                data-notes="${scale_name}" 
+                data-showTitle="true">
+            </div>
         </div>
         `)   
 
@@ -44,11 +48,9 @@ const loadNextExercise  = () => {
         })
 
         
-
-        $('.fb-container').attr('data-notes', scale_name)
         fretboard.Fretboard.drawAll('.fb-container', {
-            'showTitle': true,
-            'leftHanded': $('#leftHanded').is(":checked")
+            'leftHanded': $('#leftHanded').is(":checked"),
+            'fretWidth':30
         })
 
 
