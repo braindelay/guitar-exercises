@@ -49,7 +49,7 @@ const loadNextExercise  = () => {
         })
 
         if ( exercise.chordBases) {
-            $('#chords').append($("<b>").text(`Chords: `))
+            $('#chords').append($("<b>").text(`Diatonic chords: `))
             scale_note_names.split(' ').forEach((tone, i) => {
                 $('#chords').append($(`<span style='color:${colors[i]}'>`).text(`${tone}${exercise.chordBases[i]} `)) 
             })
