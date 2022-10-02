@@ -18,23 +18,14 @@ const loadNextExercise  = () => {
         $('#exercise').text(exercise.exercise.label)
         $('#description').text(exercise.exercise.description)
 
-        $('.fb-container').attr('data-notes', `${exercise.tone} ${exercise.scale.name}`)
-        
+        const scale_name  = `${exercise.tone} ${exercise.scale.name}`
+        $('#notes').text(`Notes: ${fretboard.asNotes(scale_name).toUpperCase()}`)
+
+        $('.fb-container').attr('data-notes', scale_name)
         fretboard.Fretboard.drawAll('.fb-container', {
             'showTitle': true,
             'leftHanded': $('#leftHanded').is(":checked")
         })
-
-        var notes = []
-        const allNotes = $('.fretboard').find('title')
-
-        allNotes.each(i => {
-            const current = allNotes[i].firstChild.textContent.replace(/[0-9]/g, '');
-            if (!notes.includes(current)) {
-                notes.push(current)
-            }
-        })
-        $('#notes').text(`Notes: ${notes.join(" ")}`)
 
 
     })
