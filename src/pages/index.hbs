@@ -28,19 +28,24 @@
     <script type="text/javascript" src="/exercises.js"></script>
     <script src="https://unpkg.com/fretboards/dist/fretboard.js"></script>
 
-    <!-- Import the webpage's stylesheet -->
+    <!-- Import the webpage's stylesheet 
     <link rel="stylesheet" href="/style.css" />
-    
+    -->    
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     
   </head>
   <body>
-    <div class="wrapper">
-      <div class="content" role="main">
+    <div class="container-fluid">
+      <div class="row">
         
         <!-- This is the start of content for our page -->
         <h1 class="title">Guitar Exercises</h1>
-        
-        <form id="practice">
+      </div>
+      <form id="practice">
+        <div class="row">           
             <fieldset>
               <legend>What scales are you practicing?</legend>
 
@@ -51,6 +56,8 @@
                 {{/scales}}
               </div>
             </fieldset>
+          </div>
+        <div class="row">
             <fieldset>
               <legend>What exercises are you practicing?</legend>
 
@@ -61,24 +68,26 @@
                 {{/exercises}}
               </div>
             </fieldset>
-            <fieldset>
+        </div>
+        <div class="row">
+
+            <fieldset>          
+
               <legend>Other options</legend>
               <div>
                 <input type="checkbox" id="leftHanded" name="leftHanded">
                 <label for="leftHanded">Left handed</label>
               </div>
-            </fieldset>
-
-          <button type="button" id="nextExercise" onclick="loadNextExercise()">Next</button>
-        </form>
-        <hr/>
-        <div>
+            </fieldset>          
+        </div>
+        <button type="button" id="nextExercise" class="btn btn-success" onclick="loadNextExercise()">Next Exercise</button>       
+      </form>
+      <div class="row">
           <h1><a id="tone"></a> <a id="scale"></a> <a id="exercise"></a></h1>   
           <span><i><small id="description"></small></i></span>       
           <h2><a id="notes"></a></h2>
           <div class="fb-container" data-frets="17" data-notes="c major" data-showTitle="true"></div>
-        </div>
-        <hr/>
+        
     </div>
 
     <script>
