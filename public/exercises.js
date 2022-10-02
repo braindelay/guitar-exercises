@@ -1,6 +1,11 @@
 
 
 const clearLastExercise = () => {
+    $('#exercise-details').html(`
+    <div id = "exercise-loader" class="spinner-border" role="status">
+        <span class="sr-only"></span>
+    </div>
+    `)
     $('#tone').empty()
     $('#scale').empty()
     $('#exercise').empty()
@@ -10,13 +15,9 @@ const clearLastExercise = () => {
 }
 
 const loadNextExercise  = () => {
+    clearLastExercise()
     $.get('exercise?' + $('#practice').serialize())
     .then((exercise) => {
-        clearLastExercise()
-        $('#tone').text(exercise.tone)
-        $('#scale').text(exercise.scale.label)
-        $('#exercise').text(exercise.exercise.label)
-        $('#description').text(exercise.exercise.description)
 
         const scale_name  = `${exercise.tone} ${exercise.scale.name}`
         const scale_note_names = fretboard.asNotes(scale_name).toUpperCase()
@@ -27,8 +28,16 @@ const loadNextExercise  = () => {
             loadNextExercise()
         }
 
-        const colors = ['red','green', 'blue', 'black', 'grey', 'orange']
+        $('#exercise-details').html(`
+        <div id = "exercise-details">
+          <h1>${exercise.tone} ${exercise.scale.label} ${exercise.exercise.label}</h1>   
+          <span><i>${exercise.exercise.description}</small></i></span>       
+          <p><div id="notes"></div></p>
+          <div class="fb-container" data-frets="17" data-notes="c major" data-showTitle="true"></div>
+        </div>
+        `)   
 
+        const colors = ['red','green', 'blue', 'black', 'grey', 'orange']
         $('#notes').append($("<b>").text(`Notes: `))
         scale_note_names.split(' ').forEach((colour, i) => {
             $('#notes').append($(`<span style='color:${colors[i]}'>`).text(`${colour} `)) 

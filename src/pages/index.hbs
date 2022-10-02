@@ -87,16 +87,16 @@
       </form>
 
       <hr/>
-      <div class="row">
-          <h1><a id="tone"></a> <a id="scale"></a> <a id="exercise"></a></h1>   
-          <span><i><small id="description"></small></i></span>       
-          <p><div id="notes"></div></p>
-          <div class="fb-container" data-frets="17" data-notes="c major" data-showTitle="true"></div>
-        
+      <div class="row" id="exercise-details" >
+      </div>
+
     </div>
 
     <script>
-      $('document').ready(loadNextExercise())
+      $('document').ready(() => {
+        clearLastExercise()
+        loadNextExercise()
+      })
     </script>
     <hr/>
     <small><i>Available on <a href="https://github.com/braindelay/guitar-exercises">github</a></i></small>
