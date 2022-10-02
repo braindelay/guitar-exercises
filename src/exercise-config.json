@@ -3,8 +3,8 @@
     "scales": [
         { "name": "major", "label": "Major", "default":  true},
         { "name": "aeolian", "label": "Minor (aeolian)", "default":  true},
-        { "name": "harmonic-minor", "label": "Minor (Harmonic)"},
-        { "name": "melodic-minor", "label": "Minor (Melodic)"},
+        { "name": "harmonic-minor", "label": "Minor (harmonic)"},
+        { "name": "melodic-minor", "label": "Minor (melodic)"},
         { "name": "minor-pentatonic", "label": "Pentatonic (minor)", "default":  true},
         { "name": "major-pentatonic", "label": "Pentatonic (major)"},
         { "name": "dom-pentatonic", "label": "Pentatonic (dominant)"},
