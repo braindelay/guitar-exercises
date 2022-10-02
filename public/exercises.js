@@ -23,6 +23,19 @@ const loadNextExercise  = () => {
         fretboard.Fretboard.drawAll('.fb-container', {
             'showTitle': true
         })
+
+        var notes = []
+        const allNotes = $('.fretboard').find('title')
+
+        allNotes.each(i => {
+            const current = allNotes[i].firstChild.textContent.replace(/[0-9]/g, '');
+            if (!notes.includes(current)) {
+                notes.push(current)
+            }
+        })
+        $('#notes').text(`Notes: ${notes.join(" ")}`)
+
+
     })
     .fail((error) => {
         console.log(`Failed: ${JSON.stringify(error)}`)

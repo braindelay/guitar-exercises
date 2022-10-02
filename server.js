@@ -111,10 +111,5 @@ const derive_exercise = (plan) => {
     exercise: config.exercises.find( c => c.name === selected_exercise),
   }
 
-
-//  exercise['noteNames']= new theory.Scale(innerName).getNoteNames().map( i => i.replace(/[0-9]/g, ''))
-//  exercise['notes']= new theory.Scale(innerName).getNoteNames()
-
-
   return exercise
 }
