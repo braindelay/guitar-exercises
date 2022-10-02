@@ -19,7 +19,22 @@ const loadNextExercise  = () => {
         $('#description').text(exercise.exercise.description)
 
         const scale_name  = `${exercise.tone} ${exercise.scale.name}`
-        $('#notes').text(`Notes: ${fretboard.asNotes(scale_name).toUpperCase()}`)
+        const scale_note_names = fretboard.asNotes(scale_name).toUpperCase()
+        
+        // workaround for an odd bug
+        const tonic = scale_note_names.split(' ').shift()
+        if (tonic === '') {
+            loadNextExercise()
+        }
+
+        const colors = ['red','green', 'blue', 'black', 'grey', 'orange']
+
+        $('#notes').append($("<b>").text(`Notes: `))
+        scale_note_names.split(' ').forEach((colour, i) => {
+            $('#notes').append($(`<span style='color:${colors[i]}'>`).text(`${colour} `)) 
+        })
+
+        
 
         $('.fb-container').attr('data-notes', scale_name)
         fretboard.Fretboard.drawAll('.fb-container', {
