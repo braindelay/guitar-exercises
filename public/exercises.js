@@ -1,4 +1,4 @@
 const loadNextExercise  = () =>{
-    $.get('doit?' + $('#practice').serialize())
+    $.get('exercise?' + $('#practice').serialize())
 
 }
