@@ -1,0 +1,22 @@
+{
+    "baseOctave": 4,
+    "tones": ["A", "B", "C", "D", "E", "F", "G"],
+    "scales": [
+        "major",
+        "minor",
+        "dorian", 
+        "phrygian",
+        "lydian",
+        "mixolydian",
+        "minorPentatonic",
+        "minorPentatonicBlues"
+    ],
+    "exercises": [
+        "scale",
+        "4-in-a-row",
+        "thirds",
+        "fourths",
+        "fifths",
+        "sixths"
+    ]   
+}
