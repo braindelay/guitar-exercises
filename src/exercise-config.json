@@ -1,5 +1,5 @@
 {
-    "tones": ["A", "B", "C", "D", "E", "F", "G"],
+    "tones": ["Ab", "A", "A#", "Bb", "B", "B#", "Cb", "C", "C#", "Db", "D", "D#", "Eb", "E", "E#", "Fb", "F", "F#", "Gb", "G", "G#"],
     "scales": [
         { "name": "major", "label": "Major", "default":  true},
         { "name": "aeolian", "label": "Minor (aeolian)", "default":  true},
@@ -18,12 +18,12 @@
         { "name": "locrian", "label": "Locrian"}
     ],
     "exercises": [
-        { "name":  "scale", "label": "Scale", "default":  true },
+        { "name":  "scale", "label": "scale", "default":  true },
         { "name": "4-in-a-row", "label": "4 in a row", "default":  true },
-        { "name": "thirds", "label": "In thirds" , "default":  true},
-        { "name": "fourths", "label": "In fourths" },
-        { "name": "fifths", "label": "In fifths" },
-        { "name": "sixths", "label": "In sixths" }
+        { "name": "thirds", "label": "in thirds", "default":  true  },
+        { "name": "fourths", "label": "in fourths" },
+        { "name": "fifths", "label": "in fifths" },
+        { "name": "sixths", "label": "in sixths" }
     ]   
 }
 
