@@ -46,7 +46,7 @@
 
               <div>
                 {{#scales}}
-                <input type="checkbox" id="scale_{{name}}" name="scale_{{name}}" checked>
+                <input type="checkbox" id="scale_{{name}}" name="scale_{{name}}" {{#default}}checked{{/default}}>
                 <label for="scales">{{label}}</label>
                 {{/scales}}
               </div>
@@ -56,8 +56,8 @@
 
               <div>
                 {{#exercises}}
-                <input type="checkbox" id="exercise_{{.}}" name="exercise_{{.}}" checked>
-                <label for="exercises">{{.}}</label>
+                <input type="checkbox" id="exercise_{{name}}" name="exercise_{{name}}" {{#default}}checked{{/default}}>
+                <label for="exercises">{{label}}</label>
                 {{/exercises}}
               </div>
             </fieldset>
@@ -69,7 +69,7 @@
         <div>
           <h1><a id="tone"></a> <a id="scale"></a> <a id="exercise"></a></h1>
 
-          <div class="fb-container" data-frets="12" data-notes="c major"></div>
+          <div class="fb-container" data-frets="17" data-notes="c major"></div>
 
           <h2><a id="notes"></a></h2>
 

@@ -14,7 +14,7 @@ const loadNextExercise  = () => {
         clearLastExercise()
         $('#tone').text(exercise.tone)
         $('#scale').text(exercise.scale.label)
-        $('#exercise').text(exercise.exercise)
+        $('#exercise').text(exercise.exercise.label)
 
         $('.fb-container').attr('data-notes', `${exercise.tone} ${exercise.scale.name}`)
         
