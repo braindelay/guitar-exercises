@@ -4,6 +4,7 @@
  */
 
 const path = require("path");
+const theory = require("musictheoryjs")
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -104,7 +105,13 @@ const derive_exercise = (plan) => {
   const exercise = {
     tone: config.tones[Math.floor(Math.random() * config.tones.length)],
     scale: plan.scales[Math.floor(Math.random() * plan.scales.length)],
-    exercise: plan.exercises[Math.floor(Math.random() * plan.exercises.length)]
+    exercise: plan.exercises[Math.floor(Math.random() * plan.exercises.length)],
   }
+
+  const innerName = `${exercise.tone}${config.baseOctave}(${exercise.scale})`
+
+  exercise['noteNames']= new theory.Scale(innerName).getNoteNames().map( i => i.replace(/[0-9]/g, ''))
+
+
   return exercise
 }
