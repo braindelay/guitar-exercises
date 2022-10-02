@@ -21,7 +21,8 @@ const loadNextExercise  = () => {
         $('.fb-container').attr('data-notes', `${exercise.tone} ${exercise.scale.name}`)
         
         fretboard.Fretboard.drawAll('.fb-container', {
-            'showTitle': true
+            'showTitle': true,
+            'leftHanded': $('#leftHanded').is(":checked")
         })
 
         var notes = []

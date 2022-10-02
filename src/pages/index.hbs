@@ -61,18 +61,24 @@
                 {{/exercises}}
               </div>
             </fieldset>
+            <fieldset>
+              <legend>Other options</legend>
+              <div>
+                <input type="checkbox" id="leftHanded" name="leftHanded">
+                <label for="leftHanded">Left handed</label>
+              </div>
+            </fieldset>
 
           <button type="button" id="nextExercise" onclick="loadNextExercise()">Next</button>
-
         </form>
-
+        <hr/>
         <div>
           <h1><a id="tone"></a> <a id="scale"></a> <a id="exercise"></a></h1>   
           <span><i><small id="description"></small></i></span>       
           <h2><a id="notes"></a></h2>
           <div class="fb-container" data-frets="17" data-notes="c major" data-showTitle="true"></div>
         </div>
-
+        <hr/>
     </div>
   </body>
 </html>
