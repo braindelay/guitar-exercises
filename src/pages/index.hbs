@@ -24,8 +24,12 @@
     <meta property="og:image" content="{{seo.image}}">
     <meta name="twitter:card" content="summary">
 
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="/exercises.js"></script>
+
     <!-- Import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
+    
     
   </head>
   <body>
@@ -35,13 +39,13 @@
         <!-- This is the start of content for our page -->
         <h1 class="title">Guitar Exercises</h1>
         
-        <form>
+        <form id="practice">
             <fieldset>
               <legend>What scales are you practicing?</legend>
 
               <div>
                 {{#scales}}
-                <input type="checkbox" id="scale_{{.}}" name="scale_{{.}}">
+                <input type="checkbox" id="scale_{{.}}" name="scale_{{.}}" checked>
                 <label for="scales">{{.}}</label>
                 {{/scales}}
               </div>
@@ -51,17 +55,18 @@
 
               <div>
                 {{#exercises}}
-                <input type="checkbox" id="exercise_{{.}}" name="exercise_{{.}}">
+                <input type="checkbox" id="exercise_{{.}}" name="exercise_{{.}}" checked>
                 <label for="exercises">{{.}}</label>
                 {{/exercises}}
               </div>
             </fieldset>
+
+          <button type="button" id="nextExercise" onclick="loadNextExercise()">Next</button>
+
         </form>
+
+
      
     </div>
-    <!-- The footer holds our remix button — you can use it for structure or cut it out ✂ -->
-    <footer class="footer">
-      
-    </footer>
   </body>
 </html>
