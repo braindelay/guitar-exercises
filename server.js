@@ -102,15 +102,17 @@ const derive_plan = (request) => {
 const derive_exercise = (plan) => {
   const config = require("./src/exercise-config.json");
 
+  const selected_scale = plan.scales[Math.floor(Math.random() * plan.scales.length)]
+
   const exercise = {
     tone: config.tones[Math.floor(Math.random() * config.tones.length)],
-    scale: plan.scales[Math.floor(Math.random() * plan.scales.length)],
+    scale: config.scales.find( c => c.name === selected_scale),
     exercise: plan.exercises[Math.floor(Math.random() * plan.exercises.length)],
   }
 
-  const innerName = `${exercise.tone}${config.baseOctave}(${exercise.scale})`
 
-  exercise['noteNames']= new theory.Scale(innerName).getNoteNames().map( i => i.replace(/[0-9]/g, ''))
+//  exercise['noteNames']= new theory.Scale(innerName).getNoteNames().map( i => i.replace(/[0-9]/g, ''))
+//  exercise['notes']= new theory.Scale(innerName).getNoteNames()
 
 
   return exercise

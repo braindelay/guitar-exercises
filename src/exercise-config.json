@@ -2,14 +2,21 @@
     "baseOctave": 4,
     "tones": ["A", "B", "C", "D", "E", "F", "G"],
     "scales": [
-        "major",
-        "minor",
-        "dorian", 
-        "phrygian",
-        "lydian",
-        "mixolydian",
-        "minorPentatonic",
-        "minorPentatonicBlues"
+        { "name": "major", "label": "Major"},
+        { "name": "aeolian", "label": "Minor (aeolian)"},
+        { "name": "harmonic-minor", "label": "Minor (Harmonic)"},
+        { "name": "melodic-minor", "label": "Minor (Melodic)"},
+        { "name": "minor-pentatonic", "label": "Pentatonic (minor)"},
+        { "name": "major-pentatonic", "label": "Pentatonic (major)"},
+        { "name": "dom-pentatonic", "label": "Pentatonic (dominant)"},
+        { "name": "minor-blues", "label": "Blues (minor)"},
+        { "name": "major-blues", "label": "Blues (major)"},
+        { "name": "composite-blues", "label": "Blues (composite)"},
+        { "name": "dorian", "label": "Dorian"},
+        { "name": "lydian", "label": "Lydian"},
+        { "name": "mixolydian", "label": "Mixolydian"},
+        { "name": "phrygian", "label": "Phrygian"},
+        { "name": "locrian", "label": "Locrian"}
     ],
     "exercises": [
         "scale",
@@ -20,3 +27,4 @@
         "sixths"
     ]   
 }
+
