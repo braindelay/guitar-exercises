@@ -98,17 +98,31 @@ const derive_plan = (request) => {
   return plan
 }
 
+
+const musicomatic = require('musicomatic')
 const derive_exercise = (plan) => {
   const config = require("./src/exercise-config.json");
 
   const selected_scale = plan.scales[Math.floor(Math.random() * plan.scales.length)]
   const selected_exercise = plan.exercises[Math.floor(Math.random() * plan.exercises.length)]
 
-
+  let modeName = null;
+  switch (selected_scale) {
+    case 'major':
+      modeName = 'Ionian'
+      break
+    default:
+      modeName = musicomatic.MODE_NAMES.find( c => c.toLowerCase() == selected_scale.toLowerCase())
+  }
+  let chordBases = null
+  if (modeName) {
+    chordBases = musicomatic.mode(modeName).chordBases 
+  }
   const exercise = {
     tone: config.tones[Math.floor(Math.random() * config.tones.length)],
     scale: config.scales.find( c => c.name === selected_scale),
     exercise: config.exercises.find( c => c.name === selected_exercise),
+    chordBases: chordBases
   }
 
   return exercise

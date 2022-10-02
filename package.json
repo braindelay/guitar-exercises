@@ -12,7 +12,8 @@
     "@fastify/view": "^7.1.0",
     "fastify": "^4.4.0",
     "handlebars": "^4.7.7",
-    "jquery": "^3.6.1"
+    "jquery": "^3.6.1",
+    "musicomatic": "0.0.5-development"
   },
   "engines": {
     "node": "14.x"

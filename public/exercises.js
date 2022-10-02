@@ -33,6 +33,7 @@ const loadNextExercise  = () => {
           <h1>${exercise.tone} ${exercise.scale.label} ${exercise.exercise.label}</h1>   
           <span><i>${exercise.exercise.description}</small></i></span>       
           <p><div id="notes"></div></p>
+          <p><div id="chords"></div></p>
           <div  class="fb-container" 
                 data-frets="17"  
                 data-notes="${scale_name}" 
@@ -43,10 +44,17 @@ const loadNextExercise  = () => {
 
         const colors = ['red','green', 'blue', 'black', 'grey', 'orange']
         $('#notes').append($("<b>").text(`Notes: `))
-        scale_note_names.split(' ').forEach((colour, i) => {
-            $('#notes').append($(`<span style='color:${colors[i]}'>`).text(`${colour} `)) 
+        scale_note_names.split(' ').forEach((tone, i) => {
+            $('#notes').append($(`<span style='color:${colors[i]}'>`).text(`${tone} `)) 
         })
 
+        if ( exercise.chordBases) {
+            $('#chords').append($("<b>").text(`Chords: `))
+            scale_note_names.split(' ').forEach((tone, i) => {
+                $('#chords').append($(`<span style='color:${colors[i]}'>`).text(`${tone}${exercise.chordBases[i]} `)) 
+            })
+              
+        }
         
         fretboard.Fretboard.drawAll('.fb-container', {
             'leftHanded': $('#leftHanded').is(":checked"),
