@@ -18,12 +18,12 @@
         { "name": "locrian", "label": "Locrian"}
     ],
     "exercises": [
-        { "name":  "scale", "label": "scale", "default":  true },
-        { "name": "4-in-a-row", "label": "4 in a row", "default":  true },
-        { "name": "thirds", "label": "in thirds", "default":  true  },
-        { "name": "fourths", "label": "in fourths" },
-        { "name": "fifths", "label": "in fifths" },
-        { "name": "sixths", "label": "in sixths" }
+        { "name":  "scale", "label": "scale", "default":  true, "description": "Run up and down the scale starting on both the A and E strings." },
+        { "name": "4-in-a-row", "label": "4 in a row", "default":  true, "description": "Run up and down the scale starting on both the A and E strings. After each 4th note go back 3 and start again." },
+        { "name": "thirds", "label": "in thirds", "default":  true, "description": "Run up and down the scale, in steps of thirds, starting on both the A and E strings"  },
+        { "name": "fourths", "label": "in fourths", "description": "Run up and down the scale, in steps of fourths, starting on both the A and E strings" },
+        { "name": "fifths", "label": "in fifths", "description": "Run up and down the scale, in steps of fifths, starting on both the A and E strings" },
+        { "name": "sixths", "label": "in sixths", "description": "Run up and down the scale, in steps of sixths, starting on both the A and E strings" }
     ]   
 }
 
