@@ -42,7 +42,7 @@ const loadNextExercise  = () => {
         </div>
         `)   
 
-        const colors = ['red','green', 'blue', 'black', 'grey', 'orange']
+        const colors = ['red','green', 'blue', 'black', 'purple', 'grey', 'orange']
         $('#notes').append($("<b>").text(`Notes: `))
         scale_note_names.split(' ').forEach((tone, i) => {
             $('#notes').append($(`<span style='color:${colors[i]}'>`).text(`${tone} `)) 

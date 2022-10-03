@@ -11,4 +11,6 @@ A simple project for running through some guitar exercises.
 - After you've done the exercise, click next to see the next one. 
 
 
-With thanks to [fretboards](https://npm.io/package/fretboards) for the fretboard rendering
+With thanks to:
+ * [fretboards](https://npm.io/package/fretboards) for the fretboard rendering
+ * [musicomatic](https://www.npmjs.com/package/musicomatic) for figuring out diatonic chords
