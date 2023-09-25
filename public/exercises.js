@@ -48,9 +48,9 @@ const clearLastExercise = () => {
                               <p><div id="notes"></div></p>
                               <p><b>Fifths: </b>
                               <span style='color:${colors[3]}'>${exercise.fifthBelow}</span>
-                              &#8594;
+                              &#8592;
                               <span style='color:${colors[0]}'>${exercise.tone}</span> 
-                              &#8594;
+                              &#8592;
                               <span style='color:${colors[4]}'>${exercise.fifthAbove}</span> 
                               </p>
                               <p><div id="chords"></div></p>
