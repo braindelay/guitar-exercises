@@ -8,13 +8,13 @@
         { "name": "minor-pentatonic", "label": "Pentatonic (minor)", "default":  true},
         { "name": "major-pentatonic", "label": "Pentatonic (major)"},
         { "name": "dom-pentatonic", "label": "Pentatonic (dominant)"},
-        { "name": "minor-blues", "label": "Blues (minor)"},
+        { "name": "minor-blues", "label": "Blues (minor)", "default":  true},
         { "name": "major-blues", "label": "Blues (major)"},
         { "name": "composite-blues", "label": "Blues (composite)"},
         { "name": "dorian", "label": "Dorian", "default":  true},
-        { "name": "lydian", "label": "Lydian"},
-        { "name": "mixolydian", "label": "Mixolydian"},
-        { "name": "phrygian", "label": "Phrygian", "default":  true},
+        { "name": "lydian", "label": "Lydian", "default":  true},
+        { "name": "mixolydian", "label": "Mixolydian", "default":  true},
+        { "name": "phrygian", "label": "Phrygian"},
         { "name": "locrian", "label": "Locrian"}
     ],
     "exercises": [
