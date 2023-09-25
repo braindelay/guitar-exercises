@@ -29,15 +29,24 @@ const loadNextExercise  = () => {
         }
 
         $('#exercise-details').html(`
-        <div id = "exercise-details">
-          <h1>${exercise.tone} ${exercise.scale.label} ${exercise.exercise.label}</h1>   
-          <span><i>${exercise.exercise.description}</small></i></span>       
-          <p><div id="notes"></div></p>
-          <p><div id="chords"></div></p>
-          <div  class="fb-container" 
-                data-frets="17"  
-                data-notes="${scale_name}" 
-                data-showTitle="true">
+        <div id="exercise-details" >
+            <div class = "row">
+                <h1>${exercise.tone} ${exercise.scale.label} ${exercise.exercise.label}</h1>   
+                <span><i>${exercise.exercise.description}</small></i></span>  
+            </div>
+            <div class = "row">
+                <div class = "col">
+                    <p><div id="notes"></div></p>
+                    <p><div id="chords"></div></p>
+                </div>
+            </div>
+            <div class = "row">
+                <div class = "col-sm-2"><img width = "100%" src="circle-of-fifths.svg" /></div>
+                <div class = "col" id = "fb-container" 
+                        data-frets="23"  
+                        data-notes="${scale_name}" 
+                        data-showTitle="true">
+                </div>
             </div>
         </div>
         `)   
@@ -56,7 +65,7 @@ const loadNextExercise  = () => {
               
         }
         
-        fretboard.Fretboard.drawAll('.fb-container', {
+        fretboard.Fretboard.drawAll('#fb-container', {
             'leftHanded': $('#leftHanded').is(":checked"),
             'fretWidth':30
         })
