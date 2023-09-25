@@ -118,10 +118,12 @@
     const tone = config.tones[Math.floor(Math.random() * config.tones.length)];
 
     let mode;
+    let scaleValues = null
     if (modeName) {
       mode = musicomatic.mode(modeName);
       chordBases = mode.chordBases;
       chordNumerals = mode.chordNumerals;
+      scaleValues = mode.keyByTonic(tone).notes
     }
 
     const majorMode = musicomatic.mode("Ionian").keyByTonic(tone);
@@ -137,6 +139,7 @@
       fifthBelow: fifthBelow,
       chordNumerals: chordNumerals,
       modeName: modeName,
+      scaleValues:scaleValues,
     };
 
     return exercise;

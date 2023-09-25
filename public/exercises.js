@@ -17,10 +17,12 @@ const clearLastExercise = () => {
     $.get("exercise?" + $("#practice").serialize())
       .then((exercise) => {
         const scale_name = `${exercise.tone} ${exercise.scale.name}`;
-        const scale_note_names = fretboard.asNotes(scale_name).toUpperCase();
+        const scale_note_names = 
+          exercise.scaleValues ? exercise.scaleValues :  
+          fretboard.asNotes(scale_name).toUpperCase().split(" ");
   
         // workaround for an odd bug
-        const tonic = scale_note_names.split(" ").shift();
+        const tonic = scale_note_names[0];
         if (tonic === "") {
           loadNextExercise();
         }
@@ -69,7 +71,7 @@ const clearLastExercise = () => {
           `);
   
         $("#notes").append($("<b>").text(`Notes: `));
-        scale_note_names.split(" ").forEach((tone, i) => {
+        scale_note_names.forEach((tone, i) => {
           $("#notes").append(
             $(`<span style='color:${colors[i]}'>`).text(`${tone} `)
           );
@@ -77,7 +79,7 @@ const clearLastExercise = () => {
   
         if (exercise.chordBases) {
           $("#chords").append($("<b>").text(`Diatonic chords: `));
-          scale_note_names.split(" ").forEach((tone, i) => {
+          scale_note_names.forEach((tone, i) => {
             $("#chords").append(
               $(`<span style='color:${colors[i]}'>`).text(
                 `${tone}${exercise.chordBases[i]} `
