@@ -90,9 +90,7 @@ const clearLastExercise = () => {
             );
           });
         }
-  
-        console.log($("#tuning").val())
-        console.log($("#tuning").val())
+
         fretboard.Fretboard.drawAll("#fb-container", {
           leftHanded: $("#leftHanded").is(":checked"),
           fretWidth: 30,
