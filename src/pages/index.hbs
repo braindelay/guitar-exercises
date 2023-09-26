@@ -27,9 +27,11 @@
    </head>
    <body>
       <div class="container-fluid">
+         <hr/>
          <div class="row">
             <!-- This is the start of content for our page -->
             <h1 class="title">Guitar Exercises</h1>
+            <small><em>by <b>braindelay</b></em></small>
          </div>
          <hr/>
          <form id="practice">
@@ -66,9 +68,15 @@
                            <fieldset>
                               <legend>Other options</legend>
                               <div>
-                                 <input type="checkbox" id="leftHanded" name="leftHanded">
                                  <label for="leftHanded">Left handed</label>
+                                 <input type="checkbox" id="leftHanded" name="leftHanded">                                 
                               </div>
+                           </fieldset>                              
+                           <fieldset>
+                              <div>
+                                 <label for="tuning">Tuning</label>
+                                 <select id="tuning" name="tuning"></select>                                 
+                              </div>                              
                            </fieldset>
                         </div>
                      </div>
@@ -84,11 +92,17 @@
       </div>
       <script>
          $('document').ready(() => {
+                           
+            Object.keys(fretboard.Tunings.guitar6).forEach( (t) => {
+               $('#tuning').append($(`<option value="${t}">${t}</option>`))
+            })
+            
            clearLastExercise()
            loadNextExercise()
          })
       </script>
       <hr/>
       <small><i>Available on <a href="https://github.com/braindelay/guitar-exercises" target="_blank">github</a></i></small>
+      <hr/>
    </body>
 </html>

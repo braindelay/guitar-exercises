@@ -59,6 +59,9 @@ const clearLastExercise = () => {
                           </div>
                       </div>
                       <div class = "row">
+                        <div class = "col"><b>Tuning:</b> ${$("#tuning").val()}</div>
+                      </div>
+                      <div class = "row">                          
                           <div class = "col" id = "fb-container" 
                                   data-frets="23"  
                                   data-notes="${scale_name}" 
@@ -88,9 +91,14 @@ const clearLastExercise = () => {
           });
         }
   
+        console.log($("#tuning").val())
+        console.log($("#tuning").val())
         fretboard.Fretboard.drawAll("#fb-container", {
           leftHanded: $("#leftHanded").is(":checked"),
           fretWidth: 30,
+          fretHeight: 20,
+          showTitle: true,
+          tuning: fretboard.Tunings.guitar6[$("#tuning").val()]
         });
       })
       .fail((error) => {

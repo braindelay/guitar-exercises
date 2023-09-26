@@ -3,7 +3,7 @@
    * Check out the two endpoints this back-end API provides in fastify.get and fastify.post below
    */
 
-  const path = require("path");
+  const path = require("path")
 
   // Require the fastify framework and instantiate it
   const fastify = require("fastify")({
@@ -49,6 +49,7 @@
       scales: config.scales,
       exercises: config.exercises,
       seo: seo,
+      //tunings: Object.keys(fretboard.Tunings.guitar6)
     };
 
     // The Handlebars code will be able to access the parameter values and build them into the page
