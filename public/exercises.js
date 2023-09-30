@@ -23,6 +23,7 @@ const clearLastExercise = () => {
   $(".fb-container").empty();
   $("#description").empty();
   $(".fretboard").remove();
+  $("#chords").empty();
 
   $("#manualTone").val(null);
   $("#manualScale").val(null);
@@ -95,7 +96,6 @@ const loadNextExercise = (useSelection) => {
       });
 
       if (exercise.chordBases) {
-        $("#chords").empty();
         $("#chords").append($("<b>").text(`Diatonic chords: `));
         scale_note_names.forEach((tone, i) => {
           $("#chords").append(
