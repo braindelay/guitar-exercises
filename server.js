@@ -46,10 +46,10 @@
 
     // Add the color properties to the params object
     const params = {
+      tones: config.tones,
       scales: config.scales,
       exercises: config.exercises,
-      seo: seo,
-      //tunings: Object.keys(fretboard.Tunings.guitar6)
+      seo: seo
     };
 
     // The Handlebars code will be able to access the parameter values and build them into the page
