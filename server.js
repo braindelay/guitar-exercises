@@ -4,6 +4,7 @@
  */
 
 const path = require("path");
+const config = require("./src/exercise-config.json");
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -99,12 +100,22 @@ const derive_plan = (request) => {
     }
   });
 
+
+  if (plan.scales.length == 0) {
+    plan.scales.push(config.scales[0].name)
+  }
+
+
+  if (plan.exercises.length == 0) {
+    plan.exercises.push(config.exercises[0].name)
+  }
+
+
   return plan;
 };
 
 const musicomatic = require("musicomatic");
 const derive_exercise = (plan) => {
-  const config = require("./src/exercise-config.json");
   const manualSelection = plan["manualSelection"];
 
   const selected_scale = manualSelection

@@ -22,13 +22,21 @@ const clearLastExercise = () => {
   $("#notes").empty();
   $(".fb-container").empty();
   $("#description").empty();
+  $(".fretboard").remove();
 
   $("#manualTone").val(null);
   $("#manualScale").val(null);
   $("#manualExercise").val(null);
 };
 
+const toggleLoading = (isLoading) => {
+  $('#nextExercise').attr('disabled', isLoading)
+  $(".show-when-loading").attr('hidden', !isLoading)
+  $(".hide-when-loading").attr('hidden', isLoading)
+}
+
 const loadNextExercise = (useSelection) => {
+  toggleLoading(true)
   clearLastExercise();
 
   if (useSelection) {
@@ -40,6 +48,8 @@ const loadNextExercise = (useSelection) => {
   const practicePath = $("#practice").serialize();
   $.get(`exercise?${practicePath}`)
     .then((exercise) => {
+      // aren't timing issues fun
+      clearLastExercise()
       const scale_name = `${exercise.tone} ${exercise.scale.name}`;
       const scale_note_names = exercise.scaleValues
         ? exercise.scaleValues
@@ -96,10 +106,7 @@ const loadNextExercise = (useSelection) => {
         });
       }
 
-      $("#fb-container").empty();
       $("#fb-container").attr("data-notes", scale_name);
-      $(".fretboard").remove();
-
       fretboard.Fretboard.drawAll("#fb-container", {
         leftHanded: $("#leftHanded").is(":checked"),
         fretWidth: 30,
@@ -107,6 +114,9 @@ const loadNextExercise = (useSelection) => {
         showTitle: true,
         tuning: fretboard.Tunings.guitar6[tuning],
       });
+
+      toggleLoading(false)
+
     })
     .fail((error) => {
       console.log(`Failed: ${JSON.stringify(error)}`);

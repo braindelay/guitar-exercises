@@ -115,7 +115,11 @@
 					</div>
 				</div>
 				<hr/>
-				<button type="button" id="nextExercise" class="btn btn-success" onclick="loadNextExercise()">Next Exercise</button>       
+				<button type="button" id="nextExercise" class="btn btn-success" onclick="loadNextExercise()">
+						<span class="show-when-loading spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+						<span class="show-when-loading">Loading</span>
+						<span class="hide-when-loading">Next Exercise</span>
+				</button>       
 			</form>
 			<hr/>
 			<div id="exercise-details" >
