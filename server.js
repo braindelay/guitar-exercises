@@ -46,10 +46,10 @@
 
     // Add the color properties to the params object
     const params = {
+      tones: config.tones,
       scales: config.scales,
       exercises: config.exercises,
-      seo: seo,
-      //tunings: Object.keys(fretboard.Tunings.guitar6)
+      seo: seo
     };
 
     // The Handlebars code will be able to access the parameter values and build them into the page
@@ -81,6 +81,14 @@
       exercises: [],
     };
 
+    if (request.query['manualTone']) {
+      plan['manualSelection'] = {
+        'tone' : request.query['manualTone'],
+        'scale' : request.query['manualScale'],
+        'exercise' : request.query['manualExercise']
+      }
+    }
+
     Object.keys(request.query).forEach(function (key) {
       if (key.startsWith("scale_") && request.query[key] == "on") {
         plan.scales.push(key.substring(key.indexOf("_") + 1));
@@ -97,11 +105,19 @@
   const musicomatic = require("musicomatic");
   const derive_exercise = (plan) => {
     const config = require("./src/exercise-config.json");
+    const manualSelection = plan['manualSelection']
 
-    const selected_scale =
-      plan.scales[Math.floor(Math.random() * plan.scales.length)];
-    const selected_exercise =
-      plan.exercises[Math.floor(Math.random() * plan.exercises.length)];
+    const selected_scale = manualSelection 
+      ? manualSelection['scale'] 
+      : plan.scales[Math.floor(Math.random() * plan.scales.length)];
+    
+    const selected_exercise = manualSelection
+      ? manualSelection['exercise']
+      : plan.exercises[Math.floor(Math.random() * plan.exercises.length)];
+
+    const tone = manualSelection
+      ? manualSelection['tone']
+      : config.tones[Math.floor(Math.random() * config.tones.length)];
 
     let modeName = null;
     switch (selected_scale) {
@@ -113,13 +129,10 @@
           (c) => c.toLowerCase() == selected_scale.toLowerCase()
         );
     }
-    let chordBases = null;
-    let chordNumerals = null;
-
-    const tone = config.tones[Math.floor(Math.random() * config.tones.length)];
-
-    let mode;
-    let scaleValues = null
+    let chordBases
+    let chordNumerals
+    let mode
+    let scaleValues
     if (modeName) {
       mode = musicomatic.mode(modeName);
       chordBases = mode.chordBases;
