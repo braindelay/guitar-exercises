@@ -39,6 +39,9 @@
          </div>
          <hr/>
          <form id="practice">
+            <input type="hidden" id="manualTone" name ="manualTone" />
+            <input type="hidden" id="manualScale" name="manualScale" />
+            <input type="hidden" id="manualExercise" name="manualExercise"/>
             <p>
                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                Toggle configuration options
@@ -95,37 +98,31 @@
 
 
          <div class="row" >
-            <div class="btn-group" role="group" aria-label="Exercise buttons">
-               <div class="dropdown">
-                  <button id="toneButton" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                     Dropdown
-                  </button>
-                  <ul class="dropdown-menu">
-                     {{#tones}}
-                     <li><button id="selectTone-{{@index}}" class="dropdown-item" type="button">{{ this }}</button></li>
-                     {{/tones}}
-                  </ul>
-               </div>   
-               <div class="dropdown">
-                  <button id="scaleButton" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                     Dropdown
-                  </button>
-                  <ul class="dropdown-menu">
-                     {{#scales}}
-                     <li><button id="selectScale-{{@index}}" class="dropdown-item" type="button">{{ label }}</button></li>
-                     {{/scales}}
-                  </ul>
-               </div>         
-               <div class="dropdown">
-                  <button id="exerciseButton" class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                     Dropdown
-                  </button>
-                  <ul class="dropdown-menu">
-                     {{#exercises}}
-                     <li><button id="selectExercise-{{@index}}" class="dropdown-item" type="button">{{ label }}</button></li>
-                     {{/exercises}}
-                  </ul>
-               </div>         
+
+   
+            <div class="col">
+            <select id = "selectedTone" class="form-select" aria-label="Tones">
+               {{#tones}}
+            <option value="{{this}}">{{ this }}</option>
+            {{/tones}}
+            </select>
+            </div>
+
+            <div class="col">
+            <select  id = "selectedScale" class="form-select" aria-label="Tones">
+               {{#scales}}
+            <option value="{{name}}">{{ label }}</option>
+            {{/scales}}
+            </select>
+            </div>
+
+            <div class="col">
+            <select id = "selectedExercise" class="form-select" aria-label="Tones">
+               {{#exercises}}
+            <option value="{{name}}">{{ label }}</option>
+            {{/exercises}}
+            </select>
+
             </div>
          </div>
 
@@ -163,9 +160,7 @@
       <script>
          $('document').ready(() => {
                            
-            Object.keys(fretboard.Tunings.guitar6).forEach( (t) => {
-               $('#tuning').append($(`<option value="${t}">${t}</option>`))
-            })
+            preparePage()
             
            clearLastExercise()
            loadNextExercise()

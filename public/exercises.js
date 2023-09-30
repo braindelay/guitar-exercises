@@ -1,15 +1,48 @@
+
+const preparePage= () =>{
+  prepareTunings()
+  prepareExerciseButtons()
+}
+
+const prepareTunings=() => {
+  Object.keys(fretboard.Tunings.guitar6).forEach( (t) => {
+    $('#tuning').append($(`<option value="${t}">${t}</option>`))
+ })
+}
+const prepareExerciseButtons = () => {
+  $('#selectedTone').on('click', () =>loadNextExercise(true) )
+  $('#selectedScale').on('click', () =>loadNextExercise(true)) 
+  $('#selectedExercise').on('click', () =>loadNextExercise(true))
+}
+
 const clearLastExercise = () => {
   $("#tone").empty();
+  $('#updatedTone').empty();
   $("#scale").empty();
   $("#exercise").empty();
   $("#notes").empty();
   $(".fb-container").empty();
   $("#description").empty();
+
+  $('#manualTone').val(null)
+  $('#manualScale').val(null)
+  $('#manualExercise').val(null)
+
 };
 
-const loadNextExercise = () => {
+const loadNextExercise = (useSelection) => {
   clearLastExercise();
-  $.get("exercise?" + $("#practice").serialize())
+
+  if (useSelection) {
+
+    $('#manualTone').val($('#selectedTone option:selected').val())
+    $('#manualScale').val($('#selectedScale option:selected').val())
+    $('#manualExercise').val($('#selectedExercise option:selected').val())
+  }
+  
+
+  const practicePath =  $("#practice").serialize()
+  $.get(`exercise?${practicePath}`)
     .then((exercise) => {
       const scale_name = `${exercise.tone} ${exercise.scale.name}`;
       const scale_note_names = 
@@ -42,6 +75,11 @@ const loadNextExercise = () => {
       $('#fifthTone').html(exercise.tone)
       $('#fifthAbove').html(exercise.fifthAbove)
       $('#tuningDescription').html(tuning)
+
+      $('#selectedTone').val(exercise.tone)
+      $('#selectedScale').val(exercise.scale.name)
+      $('#selectedExercise').val(exercise.exercise.name)
+
 
       $("#notes").append($("<b>").text(`Notes: `));
       scale_note_names.forEach((tone, i) => {
