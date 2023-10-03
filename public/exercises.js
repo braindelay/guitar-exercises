@@ -107,13 +107,58 @@ const loadNextExercise = (useSelection) => {
       }
 
       $("#fb-container").attr("data-notes", scale_name);
-      fretboard.Fretboard.drawAll("#fb-container", {
+      fretboard.Fretboard.drawAll("#fb-container", {  
         leftHanded: $("#leftHanded").is(":checked"),
         fretWidth: 30,
         fretHeight: 20,
         showTitle: true,
         tuning: fretboard.Tunings.guitar6[tuning],
       });
+
+    
+      const firstNote = scale_note_names[0].charAt(0)
+      const nextOctaves = {
+        'A' : ['C','D','E','F'],
+        'B':  ['C','D','E','F','G'],
+        'C':  [],
+        'D': [],
+        'E': ['C'],
+        'F': ['C', 'D'],
+        'G': ['C', 'D', 'E']
+      }
+      const octaveCorrection = nextOctaves[firstNote]
+
+      const staff_notes = scale_note_names.map(note => {
+        let staff_note = note.charAt(0)
+        let correction = octaveCorrection.includes(staff_note) ? `'` : ''
+        let accidental = ''; 
+        if (note.endsWith('bb')) {
+          accidental = "__"
+          correction = ''
+        } else if (note.endsWith('b')) {
+          accidental = "_"          
+        } else if (note.endsWith('##')) {
+          accidental = "^^"
+        } else if (note.endsWith('#')) {
+          accidental = "^"
+        }
+
+        // special cases!
+        var appliedStaffNote =  (firstNote == 'C' && staff_note == 'B')
+        ? staff_note
+        : staff_note.toLowerCase()
+        
+        
+        return `${accidental}${appliedStaffNote}${correction}`
+      })
+
+      var abcString = `    
+      L:1/4
+      |: ${staff_notes}
+      `
+
+      const visualOptions = {}
+      ABCJS.renderAbc("staff", abcString, visualOptions);
 
       toggleLoading(false)
 
