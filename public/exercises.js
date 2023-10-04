@@ -31,13 +31,13 @@ const clearLastExercise = () => {
 };
 
 const toggleLoading = (isLoading) => {
-  $('#nextExercise').attr('disabled', isLoading)
-  $(".show-when-loading").attr('hidden', !isLoading)
-  $(".hide-when-loading").attr('hidden', isLoading)
-}
+  $("#nextExercise").attr("disabled", isLoading);
+  $(".show-when-loading").attr("hidden", !isLoading);
+  $(".hide-when-loading").attr("hidden", isLoading);
+};
 
 const loadNextExercise = (useSelection) => {
-  toggleLoading(true)
+  toggleLoading(true);
   clearLastExercise();
 
   if (useSelection) {
@@ -50,7 +50,7 @@ const loadNextExercise = (useSelection) => {
   $.get(`exercise?${practicePath}`)
     .then((exercise) => {
       // aren't timing issues fun
-      clearLastExercise()
+      clearLastExercise();
       const scale_name = `${exercise.tone} ${exercise.scale.name}`;
       const scale_note_names = exercise.scaleValues
         ? exercise.scaleValues
@@ -62,108 +62,111 @@ const loadNextExercise = (useSelection) => {
         loadNextExercise();
       }
 
-      const colors = [
-        "red",
-        "green",
-        "blue",
-        "black",
-        "purple",
-        "grey",
-        "orange",
-      ];
-
       const tuning = $("#tuning").val() ? $("#tuning").val() : "standard";
 
-      $("#exerciseDescription").html(exercise.exercise.description);
-      $("#fifthBelow").html(exercise.fifthBelow);
-      $("#fifthTone").html(exercise.tone);
-      $("#fifthAbove").html(exercise.fifthAbove);
-      $("#tuningDescription").html(tuning);
+      updateExerciseText(exercise, tuning);
 
-      $("#selectedTone").val(exercise.tone);
-      $("#selectedScale").val(exercise.scale.name);
-      $("#selectedExercise").val(exercise.exercise.name);
+      renderNotesAndChordBases(exercise, scale_note_names);
+      renderFretboard(scale_name, tuning);
+      renderStaff(scale_note_names);
 
-      $("#headerTone").html(exercise.tone);
-      $("#headerScale").html(exercise.scale.label);
-      $("#headerExercise").html(exercise.exercise.label);
-
-      $("#notes").append($("<b>").text(`Notes: `));
-      scale_note_names.forEach((tone, i) => {
-        $("#notes").append(
-          $(`<span style='color:${colors[i]}'>`).text(`${tone} `)
-        );
-      });
-
-      if (exercise.chordBases) {
-        $("#chords").append($("<b>").text(`Diatonic chords: `));
-        scale_note_names.forEach((tone, i) => {
-          $("#chords").append(
-            $(`<span style='color:${colors[i]}'>`).text(
-              `${tone}${exercise.chordBases[i]} `
-            )
-          );
-        });
-      }
-
-      $("#fb-container").attr("data-notes", scale_name);
-      fretboard.Fretboard.drawAll("#fb-container", {  
-        leftHanded: $("#leftHanded").is(":checked"),
-        fretWidth: 30,
-        fretHeight: 20,
-        showTitle: true,
-        tuning: fretboard.Tunings.guitar6[tuning],
-      });
-
-    
-      const firstNote = scale_note_names[0].charAt(0)
-      const nextOctaves = {
-        'A' : ['C','D','E','F'],
-        'B':  ['C','D','E','F','G'],
-        'C':  [],
-        'D': [],
-        'E': ['C'],
-        'F': ['C', 'D'],
-        'G': ['C', 'D', 'E']
-      }
-      const octaveCorrection = nextOctaves[firstNote]
-
-      const staff_notes = scale_note_names.map(note => {
-        let staff_note = note.charAt(0)
-        let correction = octaveCorrection.includes(staff_note) ? `'` : ''
-        let accidental = ''; 
-        if (note.endsWith('bb')) {
-          accidental = "__"
-          correction = ''
-        } else if (note.endsWith('b')) {
-          accidental = "_"          
-        } else if (note.endsWith('##')) {
-          accidental = "^^"
-        } else if (note.endsWith('#')) {
-          accidental = "^"
-        }
-
-        // special cases!
-        var appliedStaffNote =  (firstNote == 'C' && staff_note == 'B')
-        ? staff_note
-        : staff_note.toLowerCase()
-        
-        
-        return `${accidental}${appliedStaffNote}${correction}`
-      })
-
-      var abcString = `    
-      L:1/4
-      |: ${staff_notes}
-      `
-
-      const visualOptions = {}
-      ABCJS.renderAbc("staff", abcString, visualOptions);
-
-      toggleLoading(false)
-
+      toggleLoading(false);
     })
     .fail((error) => {
       console.log(`Failed: ${JSON.stringify(error)}`);
     });
 };
+
+const updateExerciseText = (exercise, tuning) => {
+  $("#exerciseDescription").html(exercise.exercise.description);
+  $("#fifthBelow").html(exercise.fifthBelow);
+  $("#fifthTone").html(exercise.tone);
+  $("#fifthAbove").html(exercise.fifthAbove);
+  $("#tuningDescription").html(tuning);
+
+  $("#selectedTone").val(exercise.tone);
+  $("#selectedScale").val(exercise.scale.name);
+  $("#selectedExercise").val(exercise.exercise.name);
+
+  $("#headerTone").html(exercise.tone);
+  $("#headerScale").html(exercise.scale.label);
+  $("#headerExercise").html(exercise.exercise.label);
+};
+
+
+const renderNotesAndChordBases = (exercise, scale_note_names) => {
+  const colours = ["red", "green", "blue", "black", "purple", "grey", "orange"];
+
+  $("#notes").append($("<b>").text(`Notes: `));
+  scale_note_names.forEach((tone, i) => {
+    $("#notes").append(
+      $(`<span style='color:${colours[i]}'>`).text(`${tone} `)
+    );
+  });
+
+  if (exercise.chordBases) {
+    $("#chords").append($("<b>").text(`Diatonic chords: `));
+    scale_note_names.forEach((tone, i) => {
+      $("#chords").append(
+        $(`<span style='color:${colours[i]}'>`).text(
+          `${tone}${exercise.chordBases[i]} `
+        )
+      );
+    });
+  }
+};
+
+const renderFretboard = (scale_name, tuning) => {
+  $("#fb-container").attr("data-notes", scale_name);
+  fretboard.Fretboard.drawAll("#fb-container", {
+    leftHanded: $("#leftHanded").is(":checked"),
+    fretWidth: 30,
+    fretHeight: 20,
+    showTitle: true,
+    tuning: fretboard.Tunings.guitar6[tuning],
+  });
+};
+
+const renderStaff = (scale_note_names) => {
+  let isLowerNote = true;
+  const availableNotes = "ABCDEFG";
+  const scaleNoteString = scale_note_names.map((n) => n.charAt(0)).join("");
+  const staffNotes = scale_note_names.map((note, index) => {
+    let staffNote = note.charAt(0);
+
+    // we shift up an octave on C
+    // or, if there is no C in the scale, on the next tone above that
+    var isFlipNote =
+      "C" === staffNote ||
+      (scaleNoteString.indexOf("C") == -1 &&
+        availableNotes.indexOf("C") < availableNotes.indexOf(staffNote));
+
+    if (isLowerNote && isFlipNote) {
+      isLowerNote = false;
+    }
+    if (!isLowerNote) {
+      staffNote = staffNote.toLowerCase();
+    }
+
+    let accidental = "";
+    if (note.endsWith("bb")) {
+      accidental = "__";
+    } else if (note.endsWith("b")) {
+      accidental = "_";
+    } else if (note.endsWith("##")) {
+      accidental = "^^";
+    } else if (note.endsWith("#")) {
+      accidental = "^";
+    }
+    return `${accidental}${staffNote}`;
+  });
+
+  var abcString = `    
+  L:1/4
+  | ${staffNotes.join(" ")} |
+  `;
+
+  const visualOptions = {};
+  ABCJS.renderAbc("staff", abcString, visualOptions);
+};
+  
