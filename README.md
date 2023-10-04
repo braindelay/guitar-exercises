@@ -14,3 +14,4 @@ A simple project for running through some guitar exercises.
 With thanks to:
  * [fretboards](https://npm.io/package/fretboards) for the fretboard rendering
  * [musicomatic](https://www.npmjs.com/package/musicomatic) for figuring out diatonic chords
+ * [abcjs](https://www.npmjs.com/package/abcjs) for rendering the staff
