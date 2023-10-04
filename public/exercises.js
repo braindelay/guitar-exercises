@@ -56,16 +56,9 @@ const loadNextExercise = (useSelection) => {
         ? exercise.scaleValues
         : fretboard.asNotes(scale_name).toUpperCase().split(" ");
 
-      // workaround for an odd bug
-      const tonic = scale_note_names[0];
-      if (tonic === "") {
-        loadNextExercise();
-      }
-
       const tuning = $("#tuning").val() ? $("#tuning").val() : "standard";
 
       updateExerciseText(exercise, tuning);
-
       renderNotesAndChordBases(exercise, scale_note_names);
       renderFretboard(scale_name, tuning);
       renderStaff(scale_note_names);
@@ -128,25 +121,23 @@ const renderFretboard = (scale_name, tuning) => {
 };
 
 const renderStaff = (scale_note_names) => {
-  let isLowerNote = true;
-  const availableNotes = "ABCDEFG";
-  const scaleNoteString = scale_note_names.map((n) => n.charAt(0)).join("");
+  const flipNotes = {
+    A: 'CDEFG',
+    B: 'CDEFGA',
+    C: 'CDEFGAB',
+    D: 'C',
+    E: 'CD',
+    F: 'CDE',
+    G: 'CDEF'
+   }
+
+  const firstNote = scale_note_names[0].charAt(0)
   const staffNotes = scale_note_names.map((note, index) => {
-    let staffNote = note.charAt(0);
-
-    // we shift up an octave on C
-    // or, if there is no C in the scale, on the next tone above that
-    var isFlipNote =
-      "C" === staffNote ||
-      (scaleNoteString.indexOf("C") == -1 &&
-        availableNotes.indexOf("C") < availableNotes.indexOf(staffNote));
-
-    if (isLowerNote && isFlipNote) {
-      isLowerNote = false;
-    }
-    if (!isLowerNote) {
-      staffNote = staffNote.toLowerCase();
-    }
+    const staffNote = note.charAt(0);
+    let appliedStaffNote = 
+      flipNotes[firstNote].includes(staffNote) 
+      ? staffNote.toLowerCase()
+      : staffNote
 
     let accidental = "";
     if (note.endsWith("bb")) {
@@ -158,15 +149,13 @@ const renderStaff = (scale_note_names) => {
     } else if (note.endsWith("#")) {
       accidental = "^";
     }
-    return `${accidental}${staffNote}`;
+    return `${accidental}${appliedStaffNote}`;
   });
 
   var abcString = `    
   L:1/4
   | ${staffNotes.join(" ")} |
-  `;
-
+  `
   const visualOptions = {};
   ABCJS.renderAbc("staff", abcString, visualOptions);
 };
-  

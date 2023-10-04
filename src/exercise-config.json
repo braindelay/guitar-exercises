@@ -1,5 +1,5 @@
 {
-    "tones": ["Ab", "A", "A#", "Bb", "B", "B#", "Cb", "C", "C#", "Db", "D", "D#", "Eb", "E", "E#", "Fb", "F", "F#", "Gb", "G", "G#"],
+    "tones": ["Ab", "A", "A#", "Bb", "B", "Cb", "C", "C#", "Db", "D", "D#", "Eb", "E", "Fb", "F", "F#", "Gb", "G", "G#"],
     "scales": [
         { "name": "major", "label": "Major", "default":  true},
         { "name": "aeolian", "label": "Minor (aeolian)", "default":  true},
