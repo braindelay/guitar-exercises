@@ -2,6 +2,7 @@
 const preparePage = () => {
   prepareTunings();
   prepareExerciseButtons();
+  prepareStoredConfigs();
 };
 
 // when the page is loaded, update the practice setup form to have the tunings we support
@@ -115,7 +116,7 @@ const renderNotesAndChordBases = (exercise, scale_note_names) => {
     "teal",
     "aqua",
   ];
-    
+
   $("#notes").append($("<b>").text(`Notes: `));
   scale_note_names.forEach((tone, i) => {
     $("#notes").append(
@@ -194,4 +195,64 @@ const renderStaff = (scale_note_names) => {
     tablatures: true,
   };
   ABCJS.renderAbc("staff", abcString, visualOptions);
+};
+
+// ##################################################################
+// configs
+
+// load the configs from local storage into the checkboxes and selection
+const prepareStoredConfigs = () => {
+  loadCheckboxSelection("scales", ".scaleSelector");
+  loadCheckboxSelection("exercises", ".exerciseSelector");
+
+  if (getConfig("leftHanded")) {
+    $("#leftHanded").prop("checked", true);
+  }
+
+  const tuningConfig = getConfig("tuning");
+  if (tuningConfig) {
+    $("#tuning").val(tuningConfig);
+  }
+
+  $('#collapseConfigOptions').on('hidden.bs.collapse', () => {
+    storeSelectedConfigs()
+  })  
+};
+
+// store the checkboxes and selections into the local storage
+const storeSelectedConfigs = () => {
+  storeCheckboxSelection("scales", ".scaleSelector");
+  storeCheckboxSelection("exercises", ".exerciseSelector");
+
+  setConfig("leftHanded", $("#leftHanded").is(":checked"));
+  setConfig("tuning", $("#tuning").val());
+};
+
+const storeCheckboxSelection = (config, selector) => {
+  const savedScales = $(`${selector}:checked`)
+    .get()
+    .map((i) => i.id);
+  setConfig(config, savedScales);
+};
+
+const loadCheckboxSelection = (config, selector) => {
+  const savedIds = getConfig(config);
+  if (savedIds) {
+    $(`${selector}:checked`).prop("checked", false);
+    savedIds.forEach((id) => $(`#${id}`).prop("checked", true));
+  }
+};
+
+// get the config as a json object
+const getConfig = (configName) => {
+  const savedConfig = localStorage.getItem(configName);
+  if (savedConfig) {
+    return JSON.parse(savedConfig);
+  }
+  return null;
+};
+
+// store the json config as a string, so it can be reloaded by getConfig
+const setConfig = (configName, value) => {
+  localStorage.setItem(configName, JSON.stringify(value));
 };
