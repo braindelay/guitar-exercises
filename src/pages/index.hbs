@@ -93,21 +93,21 @@
 					<div class="card card-body">
 						<div class="row" >
 							<div class="col">
-								<select id = "selectedTone" class="form-select" aria-label="Tones">
+								<select id = "selectedTone" class="form-select chooseExercise" aria-label="Tones">
 									{{#tones}}
 									<option value="{{this}}">{{ this }}</option>
 									{{/tones}}
 								</select>
 							</div>
 							<div class="col">
-								<select  id = "selectedScale" class="form-select" aria-label="Tones">
+								<select  id = "selectedScale" class="form-select chooseExercise" aria-label="Tones">
 									{{#scales}}
 									<option value="{{name}}">{{ label }}</option>
 									{{/scales}}
 								</select>
 							</div>
 							<div class="col">
-								<select id = "selectedExercise" class="form-select" aria-label="Tones">
+								<select id = "selectedExercise" class="form-select chooseExercise" aria-label="Tones">
 									{{#exercises}}
 									<option value="{{name}}">{{ label }}</option>
 									{{/exercises}}
