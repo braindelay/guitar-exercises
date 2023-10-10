@@ -88,7 +88,10 @@ const updateExerciseText = (exercise, tuning) => {
 
 
 const renderNotesAndChordBases = (exercise, scale_note_names) => {
-  const colours = ["red", "green", "blue", "black", "purple", "grey", "orange"];
+  const colours = [
+    "red", "green", "blue", "black", "purple", "grey", "orange",
+    "maroon", "fuschia", "lime", "teal", "aqua"
+  ];
 
   $("#notes").append($("<b>").text(`Notes: `));
   scale_note_names.forEach((tone, i) => {

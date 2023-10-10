@@ -124,7 +124,14 @@
 				</button>       
 			</form>
 			<hr/>
-			<div id="exercise-details" >
+			<div id="loading-exercise-details" class="show-when-loading" >
+				<div class="d-flex justify-content-center">
+					<div class="spinner-border" role="status">
+						<span class="sr-only"></span>
+					</div>
+				</div>
+			</div>
+			<div id="exercise-details" class="hide-when-loading" >
 				<div class = "row">
 					<h1>
 						<span id = "headerTone"></span>
@@ -139,15 +146,15 @@
 					<div class = "col">
 						<div class = "row">
 							<div class = "col">
-								<p>
-								<div id="notes"></div>
-								</p>
+								<p><div id="notes"></div></p>
+								<p><div id="staff"></div></p>
+								
 								<p><b>Fifths: </b>
-									<span style='color:${colors[3]}' id="fifthBelow"></span>
+									<span id="fifthBelow"></span>
 									&#8592;
-									<span style='color:${colors[0]}' id="fifthTone"></span> 
+									<span id="fifthTone"></span> 
 									&#8592;
-									<span style='color:${colors[4]}' id="fifthAbove"></span> 
+									<span id="fifthAbove"></span> 
 								</p>
 								<p>
 								<div id="chords"></div>
@@ -161,11 +168,7 @@
 							data-frets="23"  
 							data-notes="" 
 							data-showTitle="true">
-						</div>
-						<div class = "row" id="staff">
-								
-
-						</div>
+						</div>						
 					</div>
 				</div>
 			</div>
