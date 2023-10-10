@@ -38,6 +38,8 @@ const toggleLoading = (isLoading) => {
 
 const loadNextExercise = (useSelection) => {
   toggleLoading(true);
+  $('.collapseOnNextExercise').collapse('hide')
+  
   clearLastExercise();
 
   if (useSelection) {
