@@ -2,6 +2,7 @@
 const preparePage = () => {
   prepareTunings();
   prepareExerciseButtons();
+  prepareCheckBoxActions();
   prepareStoredConfigs();
 };
 
@@ -16,6 +17,23 @@ const prepareTunings = () => {
 const prepareExerciseButtons = () => {
   $(".chooseExercise").on("change", () => loadNextExercise(true));
 };
+
+const prepareCheckBoxActions = () => {
+  prepareCheckBoxActionsBySelectors('#allScales','.scaleSelector')
+  prepareCheckBoxActionsBySelectors('#allExercises','.exerciseSelector')
+};
+
+const prepareCheckBoxActionsBySelectors = (allId, optionClass) => {
+  $(optionClass).on("change", () => {
+    if (!this.checked) {
+      $(allId).prop("checked", false);
+    }
+  });
+  $(allId).on("change", () => {
+    const newValue = $(allId).is(":checked");
+    $(optionClass).prop("checked", newValue);
+  });
+}
 
 /**
  * Called when we want to reload the exercise
@@ -214,9 +232,9 @@ const prepareStoredConfigs = () => {
     $("#tuning").val(tuningConfig);
   }
 
-  $('#collapseConfigOptions').on('hidden.bs.collapse', () => {
-    storeSelectedConfigs()
-  })  
+  $("#collapseConfigOptions").on("hidden.bs.collapse", () => {
+    storeSelectedConfigs();
+  });
 };
 
 // store the checkboxes and selections into the local storage
