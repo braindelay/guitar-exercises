@@ -16,15 +16,19 @@ const prepareTunings = () => {
 //  when the page is loaded, update the choose exercise form
 const prepareExerciseButtons = () => {
   $(".chooseExercise").on("change", () => loadNextExercise(true));
-  $("#collapseConfigOptions").on("show.bs.collapse", () =>
-    toggleConfigLabels(true)
+  $("#collapseConfigOptions").on("show.bs.collapse", () => {
+      toggleConfigLabels(true)
+      $("#collapseChooseExercise").collapse("hide")
+    }
   );
   $("#collapseConfigOptions").on("hide.bs.collapse", () =>
     toggleConfigLabels(false)
   );
 
-  $("#collapseChooseExercise").on("show.bs.collapse", () =>
-    toggleChooseExerciseLabels(true)
+  $("#collapseChooseExercise").on("show.bs.collapse", () => {
+      toggleChooseExerciseLabels(true)
+      $("#collapseConfigOptions").collapse("hide")
+    }
   );
   $("#collapseChooseExercise").on("hide.bs.collapse", () =>
     toggleChooseExerciseLabels(false)
