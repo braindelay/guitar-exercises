@@ -16,11 +16,34 @@ const prepareTunings = () => {
 //  when the page is loaded, update the choose exercise form
 const prepareExerciseButtons = () => {
   $(".chooseExercise").on("change", () => loadNextExercise(true));
+  $("#collapseConfigOptions").on("show.bs.collapse", () =>
+    toggleConfigLabels(true)
+  );
+  $("#collapseConfigOptions").on("hide.bs.collapse", () =>
+    toggleConfigLabels(false)
+  );
+
+  $("#collapseChooseExercise").on("show.bs.collapse", () =>
+    toggleChooseExerciseLabels(true)
+  );
+  $("#collapseChooseExercise").on("hide.bs.collapse", () =>
+    toggleChooseExerciseLabels(false)
+  );
 };
 
 const prepareCheckBoxActions = () => {
-  prepareCheckBoxActionsBySelectors('#allScales','.scaleSelector')
-  prepareCheckBoxActionsBySelectors('#allExercises','.exerciseSelector')
+  prepareCheckBoxActionsBySelectors("#allScales", ".scaleSelector");
+  prepareCheckBoxActionsBySelectors("#allExercises", ".exerciseSelector");
+};
+
+const toggleConfigLabels = (showConfig) => {
+  $("#labelForConfigPractice").attr("hidden", showConfig);
+  $("#labelForSavePracticeConfig").attr("hidden", !showConfig);
+};
+
+const toggleChooseExerciseLabels = (showConfig) => {
+  $("#labelForChooseExercise").attr("hidden", showConfig);
+  $("#labelForCloseExerciseChoice").attr("hidden", !showConfig);
 };
 
 const prepareCheckBoxActionsBySelectors = (allId, optionClass) => {
@@ -33,7 +56,7 @@ const prepareCheckBoxActionsBySelectors = (allId, optionClass) => {
     const newValue = $(allId).is(":checked");
     $(optionClass).prop("checked", newValue);
   });
-}
+};
 
 /**
  * Called when we want to reload the exercise
