@@ -174,7 +174,12 @@ const renderNotesAndChordBases = (exercise, scale_note_names) => {
     scale_note_names.forEach((tone, i) => {
       $("#chords").append(
         $(`<span style='color:${colours[i]}'>`).text(
-          `${tone}${exercise.chordBases[i]} `
+          `${tone}${
+              exercise.chordBases[i]
+                .replace('maj','')
+                .replace('min','m')
+                .replace('dim',`\u25CB`)
+            } `
         )
       );
     });
