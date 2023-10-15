@@ -15,3 +15,15 @@ With thanks to:
  * [fretboards](https://npm.io/package/fretboards) for the fretboard rendering
  * [musicomatic](https://www.npmjs.com/package/musicomatic) for figuring out diatonic chords
  * [abcjs](https://www.npmjs.com/package/abcjs) for rendering the staff
+
+
+# Local development
+
+To build
+
+    npm install
+
+To run locally 
+
+    npm start
+
