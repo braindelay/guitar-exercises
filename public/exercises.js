@@ -131,16 +131,16 @@ const clearLastExercise = () => {
 // set exercise labels
 const updateExerciseText = (exercise, tuning) => {
   $("#exerciseDescription").html(exercise.exercise.description);
-  $("#fifthBelow").html(exercise.fifthBelow);
-  $("#fifthTone").html(exercise.tone);
-  $("#fifthAbove").html(exercise.fifthAbove);
+  $("#fifthBelow").html(toMusicSymbols(exercise.fifthBelow));
+  $("#fifthTone").html(toMusicSymbols(exercise.tone));
+  $("#fifthAbove").html(toMusicSymbols(exercise.fifthAbove));
   $("#tuningDescription").html(tuning);
 
   $("#selectedTone").val(exercise.tone);
   $("#selectedScale").val(exercise.scale.name);
   $("#selectedExercise").val(exercise.exercise.name);
 
-  $("#headerTone").html(exercise.tone);
+  $("#headerTone").html(toMusicSymbols(exercise.tone));
   $("#headerScale").html(exercise.scale.label);
   $("#headerExercise").html(exercise.exercise.label);
 };
@@ -165,7 +165,7 @@ const renderNotesAndChordBases = (exercise, scale_note_names) => {
   $("#notes").append($("<b>").text(`Notes: `));
   scale_note_names.forEach((tone, i) => {
     $("#notes").append(
-      $(`<span style='color:${colours[i]}'>`).text(`${tone} `)
+      $(`<span style='color:${colours[i]}'>`).text(`${toMusicSymbols(tone)} `)
     );
   });
 
@@ -174,7 +174,7 @@ const renderNotesAndChordBases = (exercise, scale_note_names) => {
     scale_note_names.forEach((tone, i) => {
       $("#chords").append(
         $(`<span style='color:${colours[i]}'>`).text(
-          `${tone}${
+          `${toMusicSymbols(tone)}${
               exercise.chordBases[i]
                 .replace('maj','')
                 .replace('min','m')
@@ -186,6 +186,11 @@ const renderNotesAndChordBases = (exercise, scale_note_names) => {
   }
 };
 
+const toMusicSymbols  = (text) => {
+  return text
+    .replaceAll("#", `\u266F`)
+    .replaceAll("b", `\u266D`)
+}
 const renderFretboard = (scale_name, tuning) => {
   $("#fb-container").attr("data-notes", scale_name);
   fretboard.Fretboard.drawAll("#fb-container", {
